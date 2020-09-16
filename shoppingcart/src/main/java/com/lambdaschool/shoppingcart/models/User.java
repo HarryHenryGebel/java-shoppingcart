@@ -2,15 +2,10 @@ package com.lambdaschool.shoppingcart.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -28,7 +23,23 @@ public class User extends Auditable {
   @JsonIgnoreProperties(value = "user", allowSetters = true)
   private List<Cart> carts = new ArrayList<>();
 
+  @ManyToMany
+  @JoinTable(
+    name = "user_roles",
+    joinColumns = @JoinColumn(name = "userid"),
+    inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private Set<Role> roles = new HashSet<>();
+
   public User() {}
+
+  public Set<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
+  }
 
   public long getUserid() {
     return userid;
