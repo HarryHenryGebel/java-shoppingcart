@@ -25,13 +25,9 @@ public class User extends Auditable {
   @JsonIgnoreProperties(value = "user", allowSetters = true)
   private List<Cart> carts = new ArrayList<>();
 
-  @ManyToMany
-  @JoinTable(
-    name = "user_roles",
-    joinColumns = @JoinColumn(name = "userid"),
-    inverseJoinColumns = @JoinColumn(name = "role_id")
-  )
-  private Set<Role> roles = new HashSet<>();
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnoreProperties(value = "user", allowSetters = true)
+  private Set<UserRoles> roles = new HashSet<>();
 
   @Column(nullable = false)
   @JsonIgnore
@@ -48,11 +44,11 @@ public class User extends Auditable {
     this.password = passwordEncoder.encode(password);
   }
 
-  public Set<Role> getRoles() {
+  public Set<UserRoles> getRoles() {
     return roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(Set<UserRoles> roles) {
     this.roles = roles;
   }
 
