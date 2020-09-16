@@ -12,17 +12,17 @@ You are creating a Java Spring REST API server which stores data in an H2 databa
 
 All tables contain the following auditing fields
 
-* created_by - user name who created the row. Should default to SYSTEM
-* created_date - date field when the row was created
-* last_modified_by - user name who last changed data in the row. Should default to SYSTEM
-* last_modified_date - date field when the data in the row was last changed
+- created_by - user name who created the row. Should default to SYSTEM
+- created_date - date field when the row was created
+- last_modified_by - user name who last changed data in the row. Should default to SYSTEM
+- last_modified_date - date field when the data in the row was last changed
 
 Table Relationships include
 
-* Users is the driving table.
-* Users have a One to Many relationship with Carts. One user can have many shopping carts while each shopping cart is associated with only one user.
-* Carts have a Many to Many relationship with Products. Many Carts can have the same product and the same product can be in many carts.
-* The Carts - Products many to many relationship is modeled using the join table CartItems which contains the quantity of the product being ordered.
+- Users is the driving table.
+- Users have a One to Many relationship with Carts. One user can have many shopping carts while each shopping cart is associated with only one user.
+- Carts have a Many to Many relationship with Products. Many Carts can have the same product and the same product can be in many carts.
+- The Carts - Products many to many relationship is modeled using the join table CartItems which contains the quantity of the product being ordered.
 
 You are to start with the initial application provided. This the code that is in the application works but code layout is not optimal, comments are sporadic and several features are missing from the application. For example, no code allows you to update a user's information. This is provided as an example of the type of code you might see in industry. Remember we have to start from what we are given!
 
