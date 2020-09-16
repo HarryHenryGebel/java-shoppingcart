@@ -536,18 +536,18 @@ STATUS OK
     - [x] Two roles will be used - Admin for access to all of the system and User for access to only the authenticated user's information
   - [x] In the existing User model add fields for password and roles including associated getters, setters, and other needed methods
   - [ ] Add findByName to the User Service with associated repository entry
-  - [ ] Add the necessary helper functions
+  - [x] Add the necessary helper functions
   - [x] Add the SecurityUserService service
   - [x] Add and update the necessary configuration files
-- [ ] The initial endpoints are affected by security as follows
-  - [ ] http://localhost:2019/users/users
-    - [ ] Only users with role Admin can access this endpoint
-  - [ ] http://localhost:2019/users/user/1
-    - [ ] Only users with role Admin can access this endpoint
+- [x] The initial endpoints are affected by security as follows
+  - [x] http://localhost:2019/users/users
+    - [x] Only users with role Admin can access this endpoint
+  - [x] http://localhost:2019/users/user/1
+    - [x] Only users with role Admin can access this endpoint
   - [ ] POST http://localhost:2019/users/user
-    - [ ] Only users with role Admin can access this endpoint
-  - [ ] DELETE http://localhost:2019/users/user/1
-    - [ ] Only users with role Admin can access this endpoint
+    - [x] Only users with role Admin can access this endpoint
+  - [x] DELETE http://localhost:2019/users/user/1
+    - [x] Only users with role Admin can access this endpoint
   - [ ] http://localhost:2019/carts/user
     - [ ] Drop the path variable and return the information for authenticated user
   - [ ] http://localhost:2019/carts/cart/1
