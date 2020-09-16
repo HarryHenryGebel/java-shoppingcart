@@ -2,9 +2,12 @@ package com.lambdaschool.shoppingcart.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -82,7 +85,15 @@ public class User extends Auditable {
     this.carts = carts;
   }
 
-  public Collection<? extends GrantedAuthority> getAuthority() {
-    return null;
+  public List<SimpleGrantedAuthority> getAuthority() {
+    List<SimpleGrantedAuthority> roles = new ArrayList<>();
+    for (UserRoles role : this.roles) {
+      String newRole = String.format(
+        "ROLE_%s",
+        role.getRole().getName().toUpperCase()
+      );
+      roles.add(new SimpleGrantedAuthority(newRole));
+    }
+    return roles;
   }
 }

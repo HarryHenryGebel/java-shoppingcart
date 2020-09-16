@@ -4,7 +4,7 @@ A Student that completes this project shows they can:
 
 - understand the flow and implement of Spring Security and OAuth2 to provide authentication for a project
 - read user information from the access token
-- understand the issues related to CORS and implement solutions to those issues
+- undnrstand the issues related to CORS and implement solutions to those issues
 - understand how to implement a new user and logout endpoints
 - use Postman to manually test Web APIs using Authentication
 
@@ -524,21 +524,21 @@ STATUS OK
 
 ## Instructions
 
-- [ ] Please fork and clone this repository.
-- [ ] This repository does have a starter project, so you must start with that application inside of the cloned repository folder. Regularly commit and push your code as appropriate.
-- [ ] A data.sql file has been provided with seed data. You can use this class directly or modify it to fit your models. However, the data found in the file is the seed data to use! Note that the initial application has its own data.sql file. For the final project, use the file provided in the root of the repository! Note that all of the users' passwords are "LambdaLlama".
+- [x] Please fork and clone this repository.
+- [x] This repository does have a starter project, so you must start with that application inside of the cloned repository folder. Regularly commit and push your code as appropriate.
+- [x] A data.sql file has been provided with seed data. You can use this class directly or modify it to fit your models. However, the data found in the file is the seed data to use! Note that the initial application has its own data.sql file. For the final project, use the file provided in the root of the repository! Note that all of the users' passwords are "LambdaLlama".
 
 ### MVP
 
-- [ ] Add OAuth2 Security to the application
-  - [ ] Add the necessary dependencies
-  - [ ] Add the models to represent Roles and the join table between Roles and Users
-    - [ ] Two roles will be used - Admin for access to all of the system and User for access to only the authenticated user's information
-  - [ ] In the existing User model add fields for password and roles including associated getters, setters, and other needed methods
+- [x] Add OAuth2 Security to the application
+  - [x] Add the necessary dependencies
+  - [x] Add the models to represent Roles and the join table between Roles and Users
+    - [x] Two roles will be used - Admin for access to all of the system and User for access to only the authenticated user's information
+  - [x] In the existing User model add fields for password and roles including associated getters, setters, and other needed methods
   - [ ] Add findByName to the User Service with associated repository entry
   - [ ] Add the necessary helper functions
-  - [ ] Add the SecurityUserService service
-  - [ ] Add and update the necessary configuration files
+  - [x] Add the SecurityUserService service
+  - [x] Add and update the necessary configuration files
 - [ ] The initial endpoints are affected by security as follows
   - [ ] http://localhost:2019/users/users
     - [ ] Only users with role Admin can access this endpoint
