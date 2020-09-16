@@ -11,7 +11,7 @@ public class Role extends Auditable {
   @GeneratedValue
   private long roleId;
 
-  private long name;
+  private String name;
 
   @ManyToMany(mappedBy = "roles")
   private Set<User> users = new HashSet<>();
@@ -34,11 +34,11 @@ public class Role extends Auditable {
     this.roleId = roleId;
   }
 
-  public long getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(long name) {
+  public void setName(String name) {
     this.name = name;
   }
 }
