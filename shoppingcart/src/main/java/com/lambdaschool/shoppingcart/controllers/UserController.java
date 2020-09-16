@@ -21,8 +21,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
+
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
   @GetMapping(value = "/users", produces = { "application/json" })
   public ResponseEntity<?> listAllUsers() {
