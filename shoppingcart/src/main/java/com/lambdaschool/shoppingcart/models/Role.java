@@ -1,5 +1,7 @@
 package com.lambdaschool.shoppingcart.models;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,18 @@ public class Role extends Auditable {
 
   private long name;
 
+  @ManyToMany(mappedBy = "roles")
+  private Set<User> users = new HashSet<>();
+
   public Role() {}
+
+  public Set<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(Set<User> users) {
+    this.users = users;
+  }
 
   public long getRoleId() {
     return roleId;
