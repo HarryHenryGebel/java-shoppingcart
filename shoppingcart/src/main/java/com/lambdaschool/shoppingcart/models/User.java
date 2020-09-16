@@ -1,11 +1,13 @@
 package com.lambdaschool.shoppingcart.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "users")
@@ -31,7 +33,20 @@ public class User extends Auditable {
   )
   private Set<Role> roles = new HashSet<>();
 
+  @Column(nullable = false)
+  @JsonIgnore
+  private String password;
+
   public User() {}
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    this.password = passwordEncoder.encode(password);
+  }
 
   public Set<Role> getRoles() {
     return roles;
