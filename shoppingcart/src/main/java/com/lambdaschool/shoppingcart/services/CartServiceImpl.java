@@ -8,10 +8,10 @@ import com.lambdaschool.shoppingcart.models.User;
 import com.lambdaschool.shoppingcart.repositories.CartRepository;
 import com.lambdaschool.shoppingcart.repositories.ProductRepository;
 import com.lambdaschool.shoppingcart.repositories.UserRepository;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @Service(value = "cartService")
@@ -19,30 +19,38 @@ public class CartServiceImpl implements CartService {
   /**
    * Connects this service to the cart repository
    */
-  @Autowired
-  private CartRepository cartrepos;
+  private final CartRepository cartrepos;
 
   /**
    * Connects this service the user repository
    */
-  @Autowired
-  private UserRepository userrepos;
+  private final UserRepository userrepos;
 
   /**
    * Connects this service to the product repository
    */
-  @Autowired
-  private ProductRepository productrepos;
+  private final ProductRepository productrepos;
 
   /**
    * Connects this service to the auditing service in order to get current user name
    */
-  @Autowired
-  private UserAuditing userAuditing;
+  private final UserAuditing userAuditing;
+
+  public CartServiceImpl(CartRepository cartrepos, UserRepository userrepos, ProductRepository productrepos, UserAuditing userAuditing) {
+    this.cartrepos = cartrepos;
+    this.userrepos = userrepos;
+    this.productrepos = productrepos;
+    this.userAuditing = userAuditing;
+  }
 
   @Override
   public List<Cart> findAllByUserId(Long userid) {
     return cartrepos.findAllByUser_Userid(userid);
+  }
+
+  @Override
+  public List<Cart> findAllByUsername(String username) {
+    return cartrepos.findAllByUser_Username(username);
   }
 
   @Override
@@ -115,7 +123,7 @@ public class CartServiceImpl implements CartService {
       0
     ) {
       cartrepos.updateCartItemsQuantity(
-        userAuditing.getCurrentAuditor().get(),
+        userAuditing.getCurrentAuditor().orElseThrow(),
         updateCart.getCartid(),
         updateProduct.getProductid(),
         1

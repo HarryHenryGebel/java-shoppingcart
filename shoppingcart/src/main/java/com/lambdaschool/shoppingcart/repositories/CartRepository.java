@@ -6,13 +6,17 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * The CRUD repository connecting Cart to the rest of the application
  */
+@Repository
 public interface CartRepository extends CrudRepository<Cart, Long> {
   List<Cart> findAllByUser_Userid(long id);
+
+  List<Cart> findAllByUser_Username(String username);
 
   @Query(
     value = "SELECT COUNT(*) as count FROM cartitems WHERE cartid = :cartid AND productid = :productid",

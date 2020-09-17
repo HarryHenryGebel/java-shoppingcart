@@ -4,7 +4,7 @@ A Student that completes this project shows they can:
 
 - understand the flow and implement of Spring Security and OAuth2 to provide authentication for a project
 - read user information from the access token
-- undnrstand the issues related to CORS and implement solutions to those issues
+- understand the issues related to CORS and implement solutions to those issues
 - understand how to implement a new user and logout endpoints
 - use Postman to manually test Web APIs using Authentication
 
