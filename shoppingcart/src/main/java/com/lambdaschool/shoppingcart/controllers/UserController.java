@@ -2,6 +2,9 @@ package com.lambdaschool.shoppingcart.controllers;
 
 import com.lambdaschool.shoppingcart.models.User;
 import com.lambdaschool.shoppingcart.services.UserService;
+import java.net.URI;
+import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,60 +18,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.List;
-
 @RestController
 @RequestMapping("/users")
-public class UserController
-{
-    @Autowired
-    private UserService userService;
+public class UserController {
+  private final UserService userService;
 
-    @GetMapping(value = "/users", produces = {"application/json"})
-    public ResponseEntity<?> listAllUsers()
-    {
-        List<User> myUsers = userService.findAll();
-        return new ResponseEntity<>(myUsers, HttpStatus.OK);
-    }
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @GetMapping(value = "/user/{userId}",
-            produces = {"application/json"})
-    public ResponseEntity<?> getUserById(
-            @PathVariable
-                    Long userId)
-    {
-        User u = userService.findUserById(userId);
-        return new ResponseEntity<>(u,
-                                    HttpStatus.OK);
-    }
+  @GetMapping(value = "/users", produces = { "application/json" })
+  public ResponseEntity<?> listAllUsers() {
+    List<User> myUsers = userService.findAll();
+    return new ResponseEntity<>(myUsers, HttpStatus.OK);
+  }
 
-    @PostMapping(value = "/user", consumes = {"application/json"})
-    public ResponseEntity<?> addUser(@Valid @RequestBody User newuser)
-    {
-        newuser.setUserid(0);
-        newuser = userService.save(newuser);
+  @GetMapping(value = "/user/{userId}", produces = { "application/json" })
+  public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+    User u = userService.findUserById(userId);
+    return new ResponseEntity<>(u, HttpStatus.OK);
+  }
 
-        // set the location header for the newly created resource
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{userid}")
-                .buildAndExpand(newuser.getUserid())
-                .toUri();
-        responseHeaders.setLocation(newUserURI);
+  @PostMapping(value = "/user", consumes = { "application/json" })
+  public ResponseEntity<?> addUser(@Valid @RequestBody User newuser) {
+    newuser.setUserid(0);
+    newuser = userService.save(newuser);
 
-        return new ResponseEntity<>(null,
-                                    responseHeaders,
-                                    HttpStatus.CREATED);
-    }
+    // set the location header for the newly created resource
+    HttpHeaders responseHeaders = new HttpHeaders();
+    URI newUserURI = ServletUriComponentsBuilder
+      .fromCurrentRequest()
+      .path("/{userid}")
+      .buildAndExpand(newuser.getUserid())
+      .toUri();
+    responseHeaders.setLocation(newUserURI);
 
-    @DeleteMapping(value = "/user/{userId}")
-    public ResponseEntity<?> deleteUserById(
-            @PathVariable
-                    Long userId)
-    {
-        userService.delete(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+  }
+
+  @DeleteMapping(value = "/user/{userId}")
+  public ResponseEntity<?> deleteUserById(@PathVariable Long userId) {
+    userService.delete(userId);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 }
